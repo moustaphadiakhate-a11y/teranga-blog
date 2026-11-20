@@ -13,7 +13,7 @@
     //</section>
   //);
 //}
-import { useState } from 'react';
+/*import { useState } from 'react';
 import ArticleCard from '../components/ArticleCard.jsx';
 import { articlesDeTest } from '../donnees-test.js';
 
@@ -40,6 +40,54 @@ export default function Accueil() {
           onBasculerFavori={basculerFavori}
         />
       ))}
+    </section>
+  );
+}*/
+import { useState } from 'react';
+import ListeArticles from '../components/ListeArticles.jsx';
+import BarreRecherche from '../components/BarreRecherche.jsx';
+import CommentaireForm from '../components/CommentaireForm.jsx';
+import ListeCommentaires from '../components/ListeCommentaires.jsx';
+import { articlesDeTest, commentairesDeTest } from '../donnees-test.js';
+
+export default function Accueil() {
+  const [favoris, setFavoris] = useState([]);
+  const [recherche, setRecherche] = useState('');
+  const [commentaires, setCommentaires] = useState(commentairesDeTest);
+
+  function basculerFavori(id) {
+    setFavoris((actuels) =>
+      actuels.includes(id)
+        ? actuels.filter((f) => f !== id)
+        : [...actuels, id]
+    );
+  }
+
+  function ajouterCommentaire({ nom, message }) {
+    const nouveau = { id: Date.now(), postId: 1, name: nom, body: message };
+    setCommentaires((actuels) => [...actuels, nouveau]);
+  }
+
+  // Calculé à chaque rendu : le tableau d'origine reste intact.
+  const articlesFiltres = articlesDeTest.filter((a) =>
+    a.title.toLowerCase().includes(recherche.trim().toLowerCase())
+  );
+
+  return (
+    <section>
+      <h1>Accueil</h1>
+      <p>Articles en favori : {favoris.length}</p>
+
+      <BarreRecherche valeur={recherche} onChange={setRecherche} />
+      <ListeArticles
+        articles={articlesFiltres}
+        favoris={favoris}
+        onBasculerFavori={basculerFavori}
+      />
+
+      <h2>Commentaires</h2>
+      <ListeCommentaires commentaires={commentaires} />
+      <CommentaireForm onAjouter={ajouterCommentaire} />
     </section>
   );
 }
