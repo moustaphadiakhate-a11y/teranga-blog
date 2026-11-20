@@ -32,3 +32,45 @@ body {
 .etat-erreur { color: var(--erreur); border: 1px solid var(--erreur); border-radius: 6px; padding: .75rem; }
 .message-erreur { color: var(--erreur); font-size: .9rem; margin: -.5rem 0 .75rem; }
 .discret { color: var(--discret); font-size: .9rem; }
+/* Largeur limitée et centrée pour tout le contenu */
+#root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+/* Le texte long ne déborde plus de l'écran */
+p, li, h1, h2, h3 {
+  overflow-wrap: anywhere;
+}
+
+/* Cartes, boutons et champs sans changer le JSX */
+article {
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+article h3 { margin-top: 0; text-transform: capitalize; }
+
+button {
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: .5rem .9rem;
+  cursor: pointer;
+}
+
+input, textarea {
+  display: block;
+  width: 100%;
+  padding: .5rem;
+  margin: .25rem 0 .75rem;
+  border: 1px solid var(--bord);
+  border-radius: 6px;
+  font: inherit;
+}
+
+[role="alert"] { color: var(--erreur); }
